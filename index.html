@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive car sales and price analysis dashboard">
+  <title>AutoMetric | Car Sales Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="AutoMetric dashboard">
+        <span class="brand-mark">A</span>
+        <span class="brand-name">Auto<span>Metric</span></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard" data-page="dashboard">
+          <span class="nav-icon">◫</span><span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="#inventory" data-page="inventory">
+          <span class="nav-icon">▤</span><span>Car inventory</span>
+        </a>
+        <a class="nav-link" href="#sales" data-page="sales">
+          <span class="nav-icon">↗</span><span>Sales records</span>
+        </a>
+        <a class="nav-link" href="#analysis" data-page="analysis">
+          <span class="nav-icon">◷</span><span>Price analysis</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <span class="note-icon">✦</span>
+          <strong>Project workspace</strong>
+          <p>Your data stays in this browser unless you export it.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">CS</div>
+          <div><strong>Car Sales Project</strong><small>Local dashboard</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-divider">/</span><strong id="currentPage">Dashboard</strong></div>
+        <div class="topbar-right">
+          <span class="live-indicator"><i></i> Sample dataset</span>
+          <span class="topbar-date" id="todayLabel"></span>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="page-section" id="dashboard">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">OVERVIEW</div>
+              <h1>Car sales dashboard</h1>
+              <p class="subheading">A clear view of your sales performance and market trends.</p>
+            </div>
+            <a class="button button-primary" href="#sales"><span>＋</span> View sales records</a>
+          </div>
+
+          <div class="filter-bar">
+            <label class="search-field">
+              <span>⌕</span>
+              <input type="search" id="searchInput" placeholder="Search brand or model..." aria-label="Search brand or model">
+            </label>
+            <label class="filter-control">
+              <span>Year</span>
+              <select id="yearFilter" aria-label="Filter by manufacturing year"><option value="">All years</option></select>
+            </label>
+            <label class="filter-control">
+              <span>Fuel</span>
+              <select id="fuelFilter" aria-label="Filter by fuel type">
+                <option value="">All fuel types</option>
+                <option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option>
+              </select>
+            </label>
+            <label class="filter-control">
+              <span>Transmission</span>
+              <select id="transmissionFilter" aria-label="Filter by transmission">
+                <option value="">All transmissions</option>
+                <option>Automatic</option><option>Manual</option>
+              </select>
+            </label>
+            <label class="filter-control price-filter">
+              <span>Price from</span>
+              <input type="number" id="minPriceFilter" min="0" placeholder="$0" aria-label="Minimum price">
+            </label>
+            <label class="filter-control price-filter">
+              <span>Price to</span>
+              <input type="number" id="maxPriceFilter" min="0" placeholder="Any" aria-label="Maximum price">
+            </label>
+            <button class="button button-quiet reset-button" id="resetFilters">Reset</button>
+          </div>
+
+          <div class="section-title-row">
+            <div><h2>Sales snapshot</h2><p>Metrics reflect the current filters.</p></div>
+            <span class="period-tag"><span>●</span> Live dataset</span>
+          </div>
+
+          <div class="stat-grid">
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Cars sold</span><span class="stat-icon blue">↗</span></div>
+              <div class="stat-value" id="carsSold">—</div>
+              <div class="stat-foot"><span class="stat-caption">Matching sales records</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Total revenue</span><span class="stat-icon green">$</span></div>
+              <div class="stat-value" id="totalRevenue">—</div>
+              <div class="stat-foot"><span class="stat-caption">From matching sales</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Average car price</span><span class="stat-icon violet">⌁</span></div>
+              <div class="stat-value" id="averagePrice">—</div>
+              <div class="stat-foot"><span class="stat-caption">Average selling price</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Best-selling brand</span><span class="stat-icon amber">★</span></div>
+              <div class="stat-value brand-value" id="bestBrand">—</div>
+              <div class="stat-foot"><span class="stat-caption" id="bestBrandCount">Most sales</span></div>
+            </article>
+          </div>
+
+          <div class="chart-grid dashboard-charts">
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h3>Sales by brand</h3><p>Number of cars sold</p></div><span class="chart-tag">BRANDS</span></div>
+              <div class="chart-wrap"><canvas id="brandChart" aria-label="Bar chart of sales by brand"></canvas></div>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h3>Yearly sales trend</h3><p>Sales volume by year</p></div><span class="chart-tag">TREND</span></div>
+              <div class="chart-wrap"><canvas id="trendChart" aria-label="Line chart of yearly sales"></canvas></div>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h3>Sales by fuel type</h3><p>Share of matching sales</p></div><span class="chart-tag">MIX</span></div>
+              <div class="chart-wrap chart-wrap-small"><canvas id="fuelChart" aria-label="Pie chart of sales by fuel type"></canvas></div>
+            </article>
+            <article class="panel insight-panel">
+              <div class="panel-heading"><div><h3>Key insights</h3><p>Highlights from your current selection</p></div><span class="insight-spark">✦</span></div>
+              <div class="insight-list" id="dashboardInsights"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="inventory">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">VEHICLES</div>
+              <h1>Car inventory</h1>
+              <p class="subheading">A sample stock list to complement the sales dataset.</p>
+            </div>
+            <span class="inventory-count" id="inventoryCount">— vehicles in stock</span>
+          </div>
+          <div class="panel table-panel">
+            <div class="table-heading">
+              <div><h3>Available inventory</h3><p>Use the dashboard filters above to narrow this list.</p></div>
+              <span class="table-meta" id="inventoryMeta"></span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr>
+                  <th>Vehicle</th><th>Year</th><th>Fuel</th><th>Transmission</th><th>Mileage</th><th>Asking price</th><th>Stock</th>
+                </tr></thead>
+                <tbody id="inventoryBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section" id="sales">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">TRANSACTIONS</div>
+              <h1>Sales records</h1>
+              <p class="subheading">Search, sort, page through and export your car sales data.</p>
+            </div>
+            <div class="heading-actions">
+              <label class="button button-secondary upload-button">
+                ⇧ Import CSV
+                <input type="file" id="csvUpload" accept=".csv,text/csv" hidden>
+              </label>
+              <button class="button button-primary" id="exportCsv">↓ Export CSV</button>
+            </div>
+          </div>
+          <div class="panel table-panel">
+            <div class="table-heading">
+              <div><h3>All sales</h3><p>Click a column heading to sort. Showing filtered results.</p></div>
+              <span class="table-meta" id="salesMeta"></span>
+            </div>
+            <div class="table-scroll">
+              <table id="salesTable">
+                <thead><tr>
+                  <th><button class="sort-button" data-sort="brand">Vehicle <span>↕</span></button></th>
+                  <th><button class="sort-button" data-sort="year">Year <span>↕</span></button></th>
+                  <th><button class="sort-button" data-sort="mileage">Mileage <span>↕</span></button></th>
+                  <th><button class="sort-button" data-sort="fuelType">Fuel <span>↕</span></button></th>
+                  <th><button class="sort-button" data-sort="transmission">Transmission <span>↕</span></button></th>
+                  <th><button class="sort-button" data-sort="sellingPrice">Price <span>↕</span></button></th>
+                  <th><button class="sort-button" data-sort="salesDate">Sale date <span>↕</span></button></th>
+                </tr></thead>
+                <tbody id="salesBody"></tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span id="pageInfo">—</span>
+              <div class="pagination">
+                <button class="page-button" id="prevPage" aria-label="Previous page">←</button>
+                <span id="pageNumber">1</span>
+                <button class="page-button" id="nextPage" aria-label="Next page">→</button>
+              </div>
+            </div>
+          </div>
+          <p class="import-hint">CSV imports should include columns such as <code>brand, model, year, mileage, fuelType, transmission, sellingPrice, salesDate</code>. Imported data replaces the sample sales in this browser session.</p>
+        </section>
+
+        <section class="page-section" id="analysis">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">MARKET INSIGHTS</div>
+              <h1>Price analysis</h1>
+              <p class="subheading">Compare selling prices across vehicle attributes and spot standout listings.</p>
+            </div>
+          </div>
+          <div class="insight-cards" id="analysisHighlights"></div>
+          <div class="chart-grid analysis-charts">
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h3>Average price by brand</h3><p>Mean selling price for each brand</p></div><span class="chart-tag">PRICE</span></div>
+              <div class="chart-wrap"><canvas id="priceBrandChart" aria-label="Bar chart of average price by brand"></canvas></div>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h3>Average price by manufacturing year</h3><p>How model year relates to selling price</p></div><span class="chart-tag">YEAR</span></div>
+              <div class="chart-wrap"><canvas id="yearPriceChart" aria-label="Line chart of average price by manufacturing year"></canvas></div>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h3>Average price by fuel type</h3><p>Comparing vehicle fuel categories</p></div><span class="chart-tag">FUEL</span></div>
+              <div class="chart-wrap"><canvas id="fuelPriceChart" aria-label="Bar chart of average price by fuel type"></canvas></div>
+            </article>
+            <article class="panel analysis-note">
+              <div class="note-symbol">⌁</div>
+              <h3>Reading the analysis</h3>
+              <p>Prices are generated sample values in USD. The filters at the top apply across the dashboard, inventory, sales records, and analysis charts.</p>
+              <p>Import a CSV from Sales Records to analyze your own sales data. Your existing Python project remains separate and unchanged.</p>
+            </article>
+          </div>
+        </section>
+
+        <footer class="footer">AutoMetric <span>·</span> Car Sales &amp; Price Analysis <span>·</span> Local project dashboard</footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
