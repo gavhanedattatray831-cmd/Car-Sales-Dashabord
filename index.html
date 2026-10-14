@@ -260,3 +260,1023 @@
   </div>
 </body>
 </html>
+:root {
+  --navy: #14243b;
+  --navy-deep: #101d31;
+  --blue: #3868e8;
+  --blue-light: #eef3ff;
+  --text: #1e293b;
+  --muted: #7b8799;
+  --border: #e8ecf2;
+  --surface: #ffffff;
+  --background: #f6f8fb;
+  --green: #159a70;
+  --shadow: 0 8px 28px rgba(28, 43, 67, .045);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+.app-shell { min-height: 100vh; }
+
+.sidebar {
+  background: var(--navy-deep);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  left: 0;
+  padding: 25px 16px 18px;
+  position: fixed;
+  top: 0;
+  width: 248px;
+  z-index: 20;
+}
+.brand { align-items: center; display: flex; gap: 11px; padding: 0 9px; }
+.brand-mark {
+  align-items: center;
+  background: linear-gradient(145deg, #668eff, #3561df);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px #3159bd66;
+  display: flex;
+  font-family: Manrope, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+.brand-name { font-family: Manrope, sans-serif; font-size: 18px; font-weight: 800; letter-spacing: -.6px; }
+.brand-name span { color: #92a9d9; font-weight: 500; }
+.sidebar-label { color: #75839a; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; margin: 46px 10px 13px; }
+.side-nav { display: grid; gap: 5px; }
+.nav-link {
+  align-items: center;
+  border-radius: 8px;
+  color: #adbacd;
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  gap: 13px;
+  min-height: 43px;
+  padding: 0 12px;
+  transition: .18s ease;
+}
+.nav-link:hover { background: #ffffff0c; color: #fff; }
+.nav-link.active { background: #3158a9; color: white; box-shadow: inset 3px 0 #8eafff; }
+.nav-icon { align-items: center; color: #91a4c0; display: inline-flex; font-size: 18px; justify-content: center; width: 20px; }
+.nav-link.active .nav-icon { color: #d4e0ff; }
+.sidebar-bottom { margin-top: auto; }
+.sidebar-note { background: #ffffff0b; border: 1px solid #ffffff12; border-radius: 10px; margin: 0 2px 20px; padding: 15px 13px; }
+.note-icon { color: #8facff; display: block; font-size: 18px; margin-bottom: 10px; }
+.sidebar-note strong { font-size: 12px; }
+.sidebar-note p { color: #99a8bd; font-size: 11px; line-height: 1.6; margin: 6px 0 0; }
+.profile { align-items: center; border-top: 1px solid #ffffff17; display: flex; gap: 10px; padding: 16px 5px 0; }
+.avatar { align-items: center; background: #253b5d; border-radius: 50%; color: #c1d0ed; display: flex; font-size: 10px; font-weight: 700; height: 34px; justify-content: center; width: 34px; }
+.profile strong, .profile small { display: block; }
+.profile strong { font-size: 11px; font-weight: 600; }
+.profile small { color: #8a99af; font-size: 10px; margin-top: 4px; }
+
+.main-area { margin-left: 248px; min-height: 100vh; }
+.topbar {
+  align-items: center;
+  background: #ffffffed;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  height: 65px;
+  justify-content: space-between;
+  padding: 0 38px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+}
+.breadcrumb { align-items: center; color: #8a95a5; display: flex; font-size: 12px; gap: 11px; }
+.breadcrumb strong { color: #334155; font-weight: 600; }
+.crumb-divider { color: #c3cad5; }
+.topbar-right { align-items: center; display: flex; gap: 22px; }
+.live-indicator { align-items: center; color: #667387; display: flex; font-size: 11px; gap: 7px; }
+.live-indicator i { background: #27b582; border-radius: 50%; box-shadow: 0 0 0 3px #27b58220; height: 7px; width: 7px; }
+.topbar-date { color: #8a95a5; font-size: 11px; }
+.menu-toggle { background: none; border: 0; color: var(--navy); cursor: pointer; display: none; font-size: 20px; }
+
+.content { margin: 0 auto; max-width: 1540px; padding: 31px 38px 24px; }
+.page-section { margin-bottom: 52px; scroll-margin-top: 84px; }
+.page-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 25px; }
+.eyebrow { color: var(--blue); font-size: 9px; font-weight: 700; letter-spacing: 1.45px; margin-bottom: 8px; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { color: #17263d; font-family: Manrope, sans-serif; font-size: clamp(24px, 2.1vw, 30px); letter-spacing: -1.1px; line-height: 1.2; margin-bottom: 7px; }
+.subheading { color: var(--muted); font-size: 12px; margin: 0; }
+.button {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 600;
+  gap: 8px;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 13px;
+  transition: .18s ease;
+}
+.button-primary { background: var(--blue); box-shadow: 0 4px 10px #3868e82b; color: #fff; }
+.button-primary:hover { background: #2e59ca; transform: translateY(-1px); }
+.button-secondary { background: #fff; border-color: var(--border); color: #475569; }
+.button-secondary:hover { border-color: #bcc9dc; background: #fbfcfe; }
+.button-quiet { background: transparent; color: #748094; }
+.button-quiet:hover { background: #eef1f5; color: #36445a; }
+.heading-actions { align-items: center; display: flex; gap: 9px; }
+
+.filter-bar {
+  align-items: end;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 12px;
+}
+.search-field {
+  align-items: center;
+  background: #f8f9fb;
+  border: 1px solid #e9edf3;
+  border-radius: 6px;
+  display: flex;
+  flex: 1 1 190px;
+  height: 36px;
+  min-width: 170px;
+  padding: 0 10px;
+}
+.search-field span { color: #8b97a8; font-size: 21px; line-height: 1; margin-right: 7px; }
+.search-field input { background: transparent; border: 0; color: var(--text); font-size: 11px; outline: none; width: 100%; }
+.search-field input::placeholder { color: #a1aaba; }
+.filter-control { display: grid; gap: 5px; }
+.filter-control > span { color: #8a95a5; font-size: 9px; font-weight: 600; padding-left: 2px; }
+.filter-control select, .filter-control input {
+  background: #fff;
+  border: 1px solid #e4e9f0;
+  border-radius: 5px;
+  color: #48566b;
+  height: 36px;
+  max-width: 145px;
+  min-width: 105px;
+  outline: none;
+  padding: 0 8px;
+  font-size: 10px;
+}
+.filter-control select:focus, .filter-control input:focus, .search-field:focus-within { border-color: #91aaf2; box-shadow: 0 0 0 2px #3868e811; }
+.filter-control.price-filter input { max-width: 90px; min-width: 75px; }
+.reset-button { margin-bottom: 2px; min-height: 32px; padding: 0 8px; }
+
+.section-title-row { align-items: center; display: flex; justify-content: space-between; margin: 0 0 14px; }
+.section-title-row h2 { color: #223149; font-family: Manrope, sans-serif; font-size: 15px; letter-spacing: -.2px; margin-bottom: 4px; }
+.section-title-row p { color: #8994a4; font-size: 10px; margin: 0; }
+.period-tag { background: #edf8f4; border-radius: 20px; color: #16845f; font-size: 9px; font-weight: 600; padding: 6px 9px; }
+.period-tag span { color: #20ad7d; font-size: 8px; margin-right: 5px; }
+.stat-grid { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 17px; }
+.stat-card, .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; box-shadow: var(--shadow); }
+.stat-card { min-height: 133px; padding: 16px 17px; }
+.stat-top { align-items: center; display: flex; justify-content: space-between; }
+.stat-label { color: #7e899a; font-size: 10px; font-weight: 500; }
+.stat-icon { align-items: center; border-radius: 7px; display: flex; font-size: 13px; font-weight: 700; height: 28px; justify-content: center; width: 28px; }
+.stat-icon.blue { background: #edf2ff; color: #4772e2; }
+.stat-icon.green { background: #e9f8f2; color: #159a70; }
+.stat-icon.violet { background: #f3efff; color: #8b69d4; }
+.stat-icon.amber { background: #fff6e5; color: #d48a1c; }
+.stat-value { color: #17263d; font-family: Manrope, sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.8px; margin: 13px 0 7px; }
+.brand-value { font-size: 20px; }
+.stat-foot { align-items: center; color: #8e99a9; display: flex; font-size: 9px; gap: 6px; }
+.stat-caption { color: #8e99a9; }
+
+.chart-grid { display: grid; gap: 15px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.chart-panel { min-width: 0; padding: 17px 17px 12px; }
+.panel-heading { align-items: flex-start; display: flex; justify-content: space-between; }
+.panel-heading h3, .table-heading h3 { color: #25344b; font-family: Manrope, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: -.15px; margin: 0 0 5px; }
+.panel-heading p, .table-heading p { color: #939dad; font-size: 10px; margin: 0; }
+.chart-tag { background: #f4f6fa; border-radius: 4px; color: #8a95a5; font-size: 8px; font-weight: 700; letter-spacing: .7px; padding: 5px 7px; }
+.chart-wrap { height: 220px; margin-top: 12px; position: relative; }
+.chart-wrap-small { height: 215px; }
+.insight-panel { padding: 17px; }
+.insight-spark { color: #7998ee; font-size: 17px; }
+.insight-list { display: grid; gap: 2px; margin-top: 10px; }
+.insight-item { align-items: center; border-bottom: 1px solid #f0f2f6; display: flex; gap: 11px; padding: 11px 0; }
+.insight-item:last-child { border-bottom: 0; }
+.insight-bullet { align-items: center; background: #f0f4ff; border-radius: 7px; color: #5177dc; display: flex; flex: 0 0 29px; font-size: 12px; height: 29px; justify-content: center; }
+.insight-item strong { color: #344259; display: block; font-size: 10px; font-weight: 600; margin-bottom: 3px; }
+.insight-item small { color: #929dad; display: block; font-size: 9px; }
+
+.table-panel { overflow: hidden; }
+.table-heading { align-items: center; display: flex; justify-content: space-between; padding: 18px 18px 14px; }
+.table-meta { color: #8994a4; font-size: 10px; }
+.table-scroll { overflow-x: auto; width: 100%; }
+table { border-collapse: collapse; min-width: 760px; text-align: left; width: 100%; }
+thead { background: #f8f9fb; }
+th { color: #8994a4; font-size: 9px; font-weight: 600; letter-spacing: .15px; padding: 11px 15px; white-space: nowrap; }
+td { border-top: 1px solid #f0f2f5; color: #536176; font-size: 10px; padding: 12px 15px; white-space: nowrap; }
+tbody tr:hover { background: #fbfcfe; }
+.vehicle-cell { align-items: center; display: flex; gap: 9px; }
+.car-avatar { align-items: center; background: #eff3ff; border-radius: 6px; color: #5377d6; display: flex; font-size: 9px; font-weight: 700; height: 29px; justify-content: center; width: 29px; }
+.vehicle-name strong { color: #334158; display: block; font-size: 10px; font-weight: 600; }
+.vehicle-name small { color: #98a2b1; display: block; font-size: 9px; margin-top: 3px; }
+.fuel-pill { background: #f1f4f8; border-radius: 20px; color: #6e7b8e; display: inline-block; font-size: 9px; padding: 4px 8px; }
+.price-cell { color: #283850; font-weight: 700; }
+.sort-button { background: none; border: 0; color: inherit; cursor: pointer; font-size: inherit; font-weight: inherit; padding: 0; }
+.sort-button span { color: #b0b9c6; margin-left: 4px; }
+.sort-button:hover { color: var(--blue); }
+.table-footer { align-items: center; border-top: 1px solid #f0f2f5; color: #8b96a5; display: flex; font-size: 10px; justify-content: space-between; padding: 12px 16px; }
+.pagination { align-items: center; display: flex; gap: 9px; }
+.page-button { background: #fff; border: 1px solid #e7ebf1; border-radius: 5px; color: #64748b; cursor: pointer; height: 27px; width: 29px; }
+.page-button:hover:not(:disabled) { border-color: #9aafea; color: var(--blue); }
+.page-button:disabled { cursor: not-allowed; opacity: .4; }
+#pageNumber { color: #4a5870; font-weight: 600; min-width: 15px; text-align: center; }
+.import-hint { color: #8994a4; font-size: 10px; line-height: 1.7; margin: 12px 2px; }
+.import-hint code { background: #eef1f6; border-radius: 3px; color: #52627a; padding: 2px 4px; }
+.upload-button { position: relative; }
+.inventory-count { background: #edf2ff; border-radius: 6px; color: #476bd0; font-size: 10px; font-weight: 600; padding: 8px 11px; }
+.empty-state { color: #929dad; padding: 35px 10px; text-align: center; }
+
+.insight-cards { display: grid; gap: 13px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 17px; }
+.highlight-card { background: #fff; border: 1px solid var(--border); border-radius: 9px; box-shadow: var(--shadow); min-width: 0; padding: 15px; }
+.highlight-label { color: #8b96a5; font-size: 9px; margin-bottom: 10px; }
+.highlight-value { color: #20314b; font-family: Manrope, sans-serif; font-size: 18px; font-weight: 800; letter-spacing: -.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.highlight-detail { color: #929dad; font-size: 9px; margin-top: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.analysis-note { align-self: stretch; background: #f2f6ff; border: 1px solid #e3ebff; border-radius: 9px; padding: 19px; }
+.note-symbol { align-items: center; background: #dfe8ff; border-radius: 7px; color: #5075de; display: flex; font-size: 19px; height: 32px; justify-content: center; margin-bottom: 13px; width: 32px; }
+.analysis-note h3 { color: #304365; font-family: Manrope, sans-serif; font-size: 12px; margin-bottom: 8px; }
+.analysis-note p { color: #74839c; font-size: 10px; line-height: 1.65; margin-bottom: 8px; }
+.footer { color: #9aa4b1; font-size: 9px; padding: 3px 0 10px; text-align: center; }
+.footer span { color: #c0c7d1; margin: 0 5px; }
+
+@media (max-width: 1200px) {
+  .content { padding-left: 26px; padding-right: 26px; }
+  .topbar { padding-left: 26px; padding-right: 26px; }
+  .stat-grid { gap: 10px; }
+  .stat-card { padding: 14px; }
+  .filter-bar { gap: 8px; }
+}
+@media (max-width: 950px) {
+  .sidebar { width: 72px; padding-left: 10px; padding-right: 10px; }
+  .brand { justify-content: center; padding: 0; }
+  .brand-name, .sidebar-label, .nav-link > span:last-child, .sidebar-note, .profile > div:last-child { display: none; }
+  .side-nav { margin-top: 44px; }
+  .nav-link { justify-content: center; padding: 0; }
+  .nav-icon { font-size: 19px; }
+  .profile { justify-content: center; padding-top: 14px; }
+  .main-area { margin-left: 72px; }
+  .filter-control select { min-width: 95px; }
+}
+@media (max-width: 680px) {
+  .sidebar { box-shadow: 12px 0 24px #0d1a2d20; transform: translateX(-105%); transition: transform .2s ease; width: 248px; }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar .brand { justify-content: flex-start; padding: 0 9px; }
+  .sidebar .brand-name, .sidebar .sidebar-label, .sidebar .nav-link > span:last-child, .sidebar .sidebar-note, .sidebar .profile > div:last-child { display: initial; }
+  .sidebar .sidebar-label { display: block; }
+  .sidebar .nav-link { justify-content: flex-start; padding: 0 12px; }
+  .sidebar .profile { justify-content: flex-start; }
+  .main-area { margin-left: 0; }
+  .topbar { height: 58px; padding: 0 16px; }
+  .menu-toggle { display: block; }
+  .topbar-right { gap: 8px; }
+  .topbar-date { display: none; }
+  .content { padding: 23px 15px 18px; }
+  .page-heading { align-items: flex-start; gap: 15px; }
+  .page-heading > .button { align-self: center; font-size: 0; min-width: 37px; padding: 0; }
+  .page-heading > .button span { font-size: 17px; }
+  .heading-actions { flex-wrap: wrap; justify-content: flex-end; }
+  .heading-actions .button { font-size: 9px; min-height: 32px; padding: 0 8px; }
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat-card { min-height: 119px; padding: 13px; }
+  .stat-value { font-size: 21px; }
+  .brand-value { font-size: 18px; }
+  .chart-grid { grid-template-columns: 1fr; }
+  .chart-wrap { height: 210px; }
+  .insight-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-bar { align-items: stretch; }
+  .search-field { flex-basis: 100%; }
+  .filter-control { flex: 1 1 28%; }
+  .filter-control select, .filter-control input { max-width: unset; width: 100%; }
+  .filter-control.price-filter { flex: 1 1 20%; }
+  .filter-control.price-filter input { max-width: unset; }
+  .reset-button { align-self: end; }
+}
+@media (max-width: 390px) {
+  .breadcrumb { font-size: 10px; gap: 6px; }
+  .live-indicator { font-size: 9px; }
+  .page-heading { display: block; }
+  .page-heading > .button, .inventory-count { margin-top: 13px; }
+  .heading-actions { justify-content: flex-start; margin-top: 14px; }
+  .stat-label { font-size: 9px; }
+  .stat-value { font-size: 19px; }
+}
+"use strict";
+
+const BRANDS = [
+  { brand: "Toyota", models: [["Corolla", 23500], ["Camry", 31500], ["RAV4", 34500], ["Prius", 28500]] },
+  { brand: "Honda", models: [["Civic", 24500], ["Accord", 32500], ["CR-V", 33800], ["HR-V", 27500]] },
+  { brand: "Ford", models: [["Focus", 22500], ["Mustang", 42500], ["Escape", 30500], ["Explorer", 39800]] },
+  { brand: "BMW", models: [["3 Series", 46500], ["5 Series", 58500], ["X3", 52500], ["X5", 68500]] },
+  { brand: "Mercedes-Benz", models: [["C-Class", 48500], ["E-Class", 62500], ["GLC", 55900], ["GLE", 72900]] },
+  { brand: "Hyundai", models: [["Elantra", 22500], ["Sonata", 28500], ["Tucson", 30500], ["Kona", 26500]] },
+  { brand: "Tesla", models: [["Model 3", 38900], ["Model Y", 44900], ["Model S", 74900], ["Model X", 79900]] },
+  { brand: "Chevrolet", models: [["Malibu", 26500], ["Equinox", 29800], ["Camaro", 38500], ["Traverse", 36900]] },
+  { brand: "Nissan", models: [["Sentra", 21500], ["Altima", 27500], ["Rogue", 31500], ["Leaf", 29900]] },
+  { brand: "Audi", models: [["A4", 45900], ["A6", 58900], ["Q5", 54900], ["Q7", 68900]] }
+];
+
+const FUEL_TYPES = ["Petrol", "Diesel", "Hybrid", "Electric"];
+const TRANSMISSIONS = ["Automatic", "Manual"];
+const COLORS = ["#416ee8", "#20a57a", "#f0a63c", "#8d6bd1", "#e16b72", "#32a8b9", "#e28a4c", "#6a87a9", "#a17bd2", "#4b9c79"];
+const PAGE_SIZE = 10;
+
+let sales = generateSales(500);
+let inventory = generateInventory();
+let currentPage = 1;
+let sortKey = "salesDate";
+let sortDirection = "desc";
+let charts = {};
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+const number = new Intl.NumberFormat("en-US");
+
+function seededRandom(seed) {
+  let value = seed >>> 0;
+  return function random() {
+    value = (value * 1664525 + 1013904223) >>> 0;
+    return value / 4294967296;
+  };
+}
+
+function generateSales(count) {
+  const random = seededRandom(20261015);
+  const records = [];
+  const start = new Date(2022, 0, 1).getTime();
+  const end = new Date(2025, 11, 31).getTime();
+
+  for (let index = 0; index < count; index += 1) {
+    const brandEntry = BRANDS[Math.floor(random() * BRANDS.length)];
+    const modelEntry = brandEntry.models[Math.floor(random() * brandEntry.models.length)];
+    const year = 2015 + Math.floor(random() * 11);
+    const age = 2026 - year;
+    const mileage = Math.max(1200, Math.round((age * (7000 + random() * 6500) + random() * 16000) / 100) * 100);
+    const fuelRoll = random();
+    let fuelType = fuelRoll < 0.46 ? "Petrol" : fuelRoll < 0.72 ? "Diesel" : fuelRoll < 0.91 ? "Hybrid" : "Electric";
+    if (brandEntry.brand === "Tesla") fuelType = "Electric";
+    const transmission = random() < 0.76 ? "Automatic" : "Manual";
+    const conditionFactor = 0.88 + random() * 0.22;
+    const mileageFactor = Math.max(0.62, 1 - mileage / 260000);
+    const yearFactor = Math.max(0.52, 1 - age * 0.047);
+    const fuelFactor = fuelType === "Electric" ? 1.08 : fuelType === "Hybrid" ? 1.04 : 1;
+    const sellingPrice = Math.round((modelEntry[1] * yearFactor * mileageFactor * conditionFactor * fuelFactor) / 100) * 100;
+    const salesDate = new Date(start + Math.floor(random() * (end - start))).toISOString().slice(0, 10);
+
+    records.push({
+      id: index + 1,
+      brand: brandEntry.brand,
+      model: modelEntry[0],
+      year,
+      mileage,
+      fuelType,
+      transmission,
+      sellingPrice,
+      salesDate
+    });
+  }
+  return records;
+}
+
+function generateInventory() {
+  const random = seededRandom(90428);
+  const stock = [];
+  let id = 1;
+  BRANDS.forEach((entry) => {
+    entry.models.forEach((model) => {
+      const year = 2022 + Math.floor(random() * 5);
+      const fuelType = entry.brand === "Tesla" ? "Electric" : FUEL_TYPES[Math.floor(random() * FUEL_TYPES.length)];
+      const mileage = Math.round((3000 + random() * 59000) / 100) * 100;
+      const askingPrice = Math.round((model[1] * (0.77 + random() * 0.25)) / 100) * 100;
+      stock.push({
+        id: id++,
+        brand: entry.brand,
+        model: model[0],
+        year,
+        mileage,
+        fuelType,
+        transmission: random() < 0.8 ? "Automatic" : "Manual",
+        askingPrice,
+        quantity: 1 + Math.floor(random() * 8)
+      });
+    });
+  });
+  return stock;
+}
+
+function getFilteredSales() {
+  const query = $("#searchInput").value.trim().toLowerCase();
+  const year = $("#yearFilter").value;
+  const fuel = $("#fuelFilter").value;
+  const transmission = $("#transmissionFilter").value;
+  const minPrice = Number($("#minPriceFilter").value) || 0;
+  const maxInput = $("#maxPriceFilter").value;
+  const maxPrice = maxInput === "" ? Infinity : Number(maxInput);
+
+  return sales.filter((car) => {
+    const matchesSearch = !query || `${car.brand} ${car.model}`.toLowerCase().includes(query);
+    return matchesSearch &&
+      (!year || car.year === Number(year)) &&
+      (!fuel || car.fuelType === fuel) &&
+      (!transmission || car.transmission === transmission) &&
+      car.sellingPrice >= minPrice &&
+      car.sellingPrice <= maxPrice;
+  });
+}
+
+function getFilteredInventory() {
+  const query = $("#searchInput").value.trim().toLowerCase();
+  const year = $("#yearFilter").value;
+  const fuel = $("#fuelFilter").value;
+  const transmission = $("#transmissionFilter").value;
+  const minPrice = Number($("#minPriceFilter").value) || 0;
+  const maxInput = $("#maxPriceFilter").value;
+  const maxPrice = maxInput === "" ? Infinity : Number(maxInput);
+
+  return inventory.filter((car) => {
+    const matchesSearch = !query || `${car.brand} ${car.model}`.toLowerCase().includes(query);
+    return matchesSearch &&
+      (!year || car.year === Number(year)) &&
+      (!fuel || car.fuelType === fuel) &&
+      (!transmission || car.transmission === transmission) &&
+      car.askingPrice >= minPrice &&
+      car.askingPrice <= maxPrice;
+  });
+}
+
+function groupBy(records, key) {
+  return records.reduce((result, record) => {
+    const value = record[key] || "Unknown";
+    result[value] = (result[value] || 0) + 1;
+    return result;
+  }, {});
+}
+
+function averageBy(records, groupKey, valueKey) {
+  const totals = {};
+  records.forEach((record) => {
+    const key = record[groupKey] || "Unknown";
+    if (!totals[key]) totals[key] = { sum: 0, count: 0 };
+    totals[key].sum += Number(record[valueKey]) || 0;
+    totals[key].count += 1;
+  });
+  return Object.fromEntries(
+    Object.entries(totals).map(([key, value]) => [key, value.sum / value.count])
+  );
+}
+
+function makeChart(id, config) {
+  const canvas = document.getElementById(id);
+  if (!canvas || typeof Chart === "undefined") return;
+  if (charts[id]) charts[id].destroy();
+  charts[id] = new Chart(canvas, config);
+}
+
+function chartOptions(formatCurrency = false) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 350 },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: "#17263d",
+        padding: 10,
+        displayColors: false,
+        callbacks: {
+          label: (context) => formatCurrency
+            ? currency.format(context.parsed.y ?? context.parsed)
+            : `${number.format(context.parsed.y ?? context.parsed)}`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        border: { display: false },
+        ticks: { color: "#8994a4", font: { family: "DM Sans", size: 9 }, maxRotation: 0 }
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: "#edf0f5", drawTicks: false },
+        border: { display: false, dash: [3, 4] },
+        ticks: {
+          color: "#8994a4",
+          padding: 8,
+          font: { family: "DM Sans", size: 9 },
+          callback: (value) => formatCurrency ? `$${Math.round(value / 1000)}k` : value
+        }
+      }
+    }
+  };
+}
+
+function updateSummary(records) {
+  const total = records.reduce((sum, car) => sum + car.sellingPrice, 0);
+  const average = records.length ? total / records.length : 0;
+  const brandCounts = groupBy(records, "brand");
+  const bestBrand = Object.entries(brandCounts).sort((a, b) => b[1] - a[1])[0];
+
+  $("#carsSold").textContent = number.format(records.length);
+  $("#totalRevenue").textContent = currency.format(total);
+  $("#averagePrice").textContent = currency.format(average);
+  $("#bestBrand").textContent = bestBrand ? bestBrand[0] : "—";
+  $("#bestBrandCount").textContent = bestBrand ? `${number.format(bestBrand[1])} matching sales` : "No matching sales";
+}
+
+function updateDashboardCharts(records) {
+  const brandCounts = groupBy(records, "brand");
+  const brands = Object.entries(brandCounts).sort((a, b) => b[1] - a[1]);
+  makeChart("brandChart", {
+    type: "bar",
+    data: {
+      labels: brands.map(([brand]) => brand),
+      datasets: [{
+        data: brands.map(([, count]) => count),
+        backgroundColor: brands.map((_, index) => index === 0 ? "#3868e8" : "#9db5f5"),
+        borderRadius: 4,
+        maxBarThickness: 23
+      }]
+    },
+    options: chartOptions()
+  });
+
+  const years = [...new Set(records.map((car) => car.salesDate.slice(0, 4)))].sort();
+  const yearly = years.map((year) => records.filter((car) => car.salesDate.startsWith(year)).length);
+  makeChart("trendChart", {
+    type: "line",
+    data: {
+      labels: years,
+      datasets: [{
+        data: yearly,
+        borderColor: "#3868e8",
+        backgroundColor: "#3868e81a",
+        fill: true,
+        tension: 0.36,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        pointBackgroundColor: "#fff",
+        pointBorderColor: "#3868e8",
+        pointBorderWidth: 2
+      }]
+    },
+    options: chartOptions()
+  });
+
+  const fuelCounts = groupBy(records, "fuelType");
+  const fuelLabels = Object.keys(fuelCounts);
+  makeChart("fuelChart", {
+    type: "doughnut",
+    data: {
+      labels: fuelLabels,
+      datasets: [{
+        data: fuelLabels.map((fuel) => fuelCounts[fuel]),
+        backgroundColor: fuelLabels.map((_, index) => COLORS[index % COLORS.length]),
+        borderColor: "#fff",
+        borderWidth: 3,
+        hoverOffset: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "68%",
+      plugins: {
+        legend: {
+          display: true,
+          position: "right",
+          labels: { usePointStyle: true, pointStyle: "circle", boxWidth: 7, padding: 14, color: "#728096", font: { family: "DM Sans", size: 9 } }
+        },
+        tooltip: { backgroundColor: "#17263d", padding: 9 }
+      }
+    }
+  });
+
+  updateDashboardInsights(records);
+}
+
+function updateDashboardInsights(records) {
+  const sortedByPrice = [...records].sort((a, b) => b.sellingPrice - a.sellingPrice);
+  const brandCounts = groupBy(records, "brand");
+  const bestBrand = Object.entries(brandCounts).sort((a, b) => b[1] - a[1])[0];
+  const average = records.length ? records.reduce((sum, car) => sum + car.sellingPrice, 0) / records.length : 0;
+  const items = [
+    ["★", "Top-selling brand", bestBrand ? `${bestBrand[0]} · ${bestBrand[1]} sales` : "No data available"],
+    ["↑", "Highest sale", sortedByPrice[0] ? `${sortedByPrice[0].brand} ${sortedByPrice[0].model} · ${currency.format(sortedByPrice[0].sellingPrice)}` : "No data available"],
+    ["↓", "Average selling price", records.length ? currency.format(average) : "No data available"],
+    ["◷", "Most recent sales year", records.length ? records.map((car) => car.salesDate.slice(0, 4)).sort().at(-1) : "No data available"]
+  ];
+  $("#dashboardInsights").innerHTML = items.map(([icon, title, detail]) =>
+    `<div class="insight-item"><span class="insight-bullet">${icon}</span><div><strong>${escapeHtml(title)}</strong><small>${escapeHtml(detail)}</small></div></div>`
+  ).join("");
+}
+
+function updateAnalysis(records) {
+  const sorted = [...records].sort((a, b) => a.sellingPrice - b.sellingPrice);
+  const mostAffordable = sorted[0];
+  const mostExpensive = sorted.at(-1);
+  const brandCounts = groupBy(records, "brand");
+  const bestBrand = Object.entries(brandCounts).sort((a, b) => b[1] - a[1])[0];
+
+  const highlights = [
+    ["Most expensive car", mostExpensive ? currency.format(mostExpensive.sellingPrice) : "—", mostExpensive ? `${mostExpensive.year} ${mostExpensive.brand} ${mostExpensive.model}` : "No matching cars"],
+    ["Most affordable car", mostAffordable ? currency.format(mostAffordable.sellingPrice) : "—", mostAffordable ? `${mostAffordable.year} ${mostAffordable.brand} ${mostAffordable.model}` : "No matching cars"],
+    ["Best-selling brand", bestBrand ? bestBrand[0] : "—", bestBrand ? `${bestBrand[1]} matching sales` : "No matching cars"],
+    ["Average price", records.length ? currency.format(records.reduce((sum, car) => sum + car.sellingPrice, 0) / records.length) : "—", `${number.format(records.length)} matching sales`]
+  ];
+  $("#analysisHighlights").innerHTML = highlights.map(([label, value, detail]) =>
+    `<article class="highlight-card"><div class="highlight-label">${escapeHtml(label)}</div><div class="highlight-value" title="${escapeHtml(value)}">${escapeHtml(value)}</div><div class="highlight-detail" title="${escapeHtml(detail)}">${escapeHtml(detail)}</div></article>`
+  ).join("");
+
+  const brandAverages = averageBy(records, "brand", "sellingPrice");
+  const brands = Object.entries(brandAverages).sort((a, b) => b[1] - a[1]);
+  makeChart("priceBrandChart", {
+    type: "bar",
+    data: {
+      labels: brands.map(([brand]) => brand),
+      datasets: [{
+        data: brands.map(([, average]) => average),
+        backgroundColor: brands.map((_, index) => index === 0 ? "#3868e8" : "#a7bbf2"),
+        borderRadius: 4,
+        maxBarThickness: 23
+      }]
+    },
+    options: chartOptions(true)
+  });
+
+  const yearAverages = averageBy(records, "year", "sellingPrice");
+  const modelYears = Object.keys(yearAverages).sort();
+  makeChart("yearPriceChart", {
+    type: "line",
+    data: {
+      labels: modelYears,
+      datasets: [{
+        data: modelYears.map((year) => yearAverages[year]),
+        borderColor: "#18a477",
+        backgroundColor: "#18a47718",
+        fill: true,
+        tension: .35,
+        pointRadius: 3,
+        pointBackgroundColor: "#fff",
+        pointBorderColor: "#18a477",
+        pointBorderWidth: 2
+      }]
+    },
+    options: chartOptions(true)
+  });
+
+  const fuelAverages = averageBy(records, "fuelType", "sellingPrice");
+  const fuelLabels = Object.keys(fuelAverages);
+  makeChart("fuelPriceChart", {
+    type: "bar",
+    data: {
+      labels: fuelLabels,
+      datasets: [{
+        data: fuelLabels.map((fuel) => fuelAverages[fuel]),
+        backgroundColor: fuelLabels.map((_, index) => COLORS[index]),
+        borderRadius: 4,
+        maxBarThickness: 38
+      }]
+    },
+    options: chartOptions(true)
+  });
+}
+
+function vehicleCell(car) {
+  const initials = escapeHtml(car.brand.slice(0, 2).toUpperCase());
+  return `<div class="vehicle-cell"><span class="car-avatar">${initials}</span><span class="vehicle-name"><strong>${escapeHtml(car.brand)} ${escapeHtml(car.model)}</strong><small>Sales ID #${escapeHtml(car.id)}</small></span></div>`;
+}
+
+function updateSalesTable(records) {
+  const sortedRecords = [...records].sort((a, b) => {
+    const left = a[sortKey];
+    const right = b[sortKey];
+    if (sortKey === "salesDate") return sortDirection === "asc" ? left.localeCompare(right) : right.localeCompare(left);
+    if (typeof left === "number") return sortDirection === "asc" ? left - right : right - left;
+    return sortDirection === "asc"
+      ? String(left).localeCompare(String(right))
+      : String(right).localeCompare(String(left));
+  });
+
+  const pageCount = Math.max(1, Math.ceil(sortedRecords.length / PAGE_SIZE));
+  currentPage = Math.min(currentPage, pageCount);
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageRecords = sortedRecords.slice(start, start + PAGE_SIZE);
+
+  $("#salesBody").innerHTML = pageRecords.length ? pageRecords.map((car) => `
+    <tr>
+      <td>${vehicleCell(car)}</td>
+      <td>${escapeHtml(car.year)}</td>
+      <td>${number.format(car.mileage)} mi</td>
+      <td><span class="fuel-pill">${escapeHtml(car.fuelType)}</span></td>
+      <td>${escapeHtml(car.transmission)}</td>
+      <td class="price-cell">${currency.format(car.sellingPrice)}</td>
+      <td>${formatDate(car.salesDate)}</td>
+    </tr>`).join("") : `<tr><td class="empty-state" colspan="7">No sales match these filters.</td></tr>`;
+
+  $("#salesMeta").textContent = `${number.format(records.length)} records`;
+  $("#pageInfo").textContent = records.length
+    ? `Showing ${number.format(start + 1)}–${number.format(Math.min(start + PAGE_SIZE, records.length))} of ${number.format(records.length)} records`
+    : "No matching records";
+  $("#pageNumber").textContent = `${currentPage} / ${pageCount}`;
+  $("#prevPage").disabled = currentPage <= 1 || !records.length;
+  $("#nextPage").disabled = currentPage >= pageCount || !records.length;
+
+  $$(".sort-button").forEach((button) => {
+    const indicator = button.querySelector("span");
+    if (button.dataset.sort === sortKey) indicator.textContent = sortDirection === "asc" ? "↑" : "↓";
+    else indicator.textContent = "↕";
+  });
+}
+
+function updateInventoryTable() {
+  const records = getFilteredInventory();
+  $("#inventoryCount").textContent = `${number.format(records.reduce((sum, car) => sum + car.quantity, 0))} vehicles in stock`;
+  $("#inventoryMeta").textContent = `${number.format(records.length)} models`;
+
+  $("#inventoryBody").innerHTML = records.length ? records.map((car) => `
+    <tr>
+      <td>${vehicleCell({ ...car, id: `INV-${car.id}` })}</td>
+      <td>${car.year}</td>
+      <td><span class="fuel-pill">${escapeHtml(car.fuelType)}</span></td>
+      <td>${escapeHtml(car.transmission)}</td>
+      <td>${number.format(car.mileage)} mi</td>
+      <td class="price-cell">${currency.format(car.askingPrice)}</td>
+      <td>${car.quantity} units</td>
+    </tr>`).join("") : `<tr><td class="empty-state" colspan="7">No inventory matches these filters.</td></tr>`;
+}
+
+function updateAll() {
+  const filtered = getFilteredSales();
+  currentPage = 1;
+  updateSummary(filtered);
+  updateDashboardCharts(filtered);
+  updateAnalysis(filtered);
+  updateSalesTable(filtered);
+  updateInventoryTable();
+}
+
+function formatDate(value) {
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime())
+    ? escapeHtml(value)
+    : date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[character]);
+}
+
+function csvEscape(value) {
+  const text = String(value ?? "");
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+
+function exportCsv() {
+  const records = getFilteredSales();
+  const columns = ["brand", "model", "year", "mileage", "fuelType", "transmission", "sellingPrice", "salesDate"];
+  const lines = [columns.join(",")];
+  records.forEach((car) => lines.push(columns.map((column) => csvEscape(car[column])).join(",")));
+
+  const blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "car-sales-records.csv";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const character = text[index];
+    if (inQuotes && character === '"' && text[index + 1] === '"') {
+      field += '"';
+      index += 1;
+    } else if (character === '"') {
+      inQuotes = !inQuotes;
+    } else if (character === "," && !inQuotes) {
+      row.push(field);
+      field = "";
+    } else if ((character === "\n" || character === "\r") && !inQuotes) {
+      if (character === "\r" && text[index + 1] === "\n") index += 1;
+      row.push(field);
+      if (row.some((value) => value.trim() !== "")) rows.push(row);
+      row = [];
+      field = "";
+    } else {
+      field += character;
+    }
+  }
+  row.push(field);
+  if (row.some((value) => value.trim() !== "")) rows.push(row);
+  if (rows.length < 2) throw new Error("The CSV needs a header row and at least one data row.");
+
+  const headers = rows[0].map((header) => header.trim().replace(/^\uFEFF/, "").toLowerCase().replace(/[\s_-]/g, ""));
+  const aliases = {
+    brand: ["brand", "make"],
+    model: ["model", "car"],
+    year: ["year", "manufacturingyear", "modelyear"],
+    mileage: ["mileage", "odometer", "kilometers", "km"],
+    fuelType: ["fueltype", "fuel"],
+    transmission: ["transmission", "gearbox"],
+    sellingPrice: ["sellingprice", "price", "saleprice", "sellingpriceusd"],
+    salesDate: ["salesdate", "date", "saledate", "transactiondate"]
+  };
+
+  const indexes = {};
+  Object.entries(aliases).forEach(([key, options]) => {
+    indexes[key] = headers.findIndex((header) => options.includes(header));
+  });
+  const required = ["brand", "model", "year", "mileage", "fuelType", "transmission", "sellingPrice"];
+  const missing = required.filter((key) => indexes[key] < 0);
+  if (missing.length) throw new Error(`Missing required CSV columns: ${missing.join(", ")}.`);
+
+  const imported = rows.slice(1).map((values, index) => {
+    const getValue = (key) => indexes[key] < 0 ? "" : (values[indexes[key]] || "").trim();
+    const year = Number(getValue("year"));
+    const mileage = Number(getValue("mileage").replace(/[,$\s]/g, ""));
+    const sellingPrice = Number(getValue("sellingPrice").replace(/[,$\s]/g, ""));
+    if (!getValue("brand") || !getValue("model") || !Number.isFinite(year) || !Number.isFinite(mileage) || !Number.isFinite(sellingPrice)) return null;
+
+    const rawDate = getValue("salesDate");
+    const parsedDate = rawDate ? new Date(rawDate) : new Date();
+    return {
+      id: index + 1,
+      brand: getValue("brand"),
+      model: getValue("model"),
+      year,
+      mileage,
+      fuelType: normalizeFuel(getValue("fuelType")),
+      transmission: normalizeTransmission(getValue("transmission")),
+      sellingPrice,
+      salesDate: Number.isNaN(parsedDate.getTime()) ? new Date().toISOString().slice(0, 10) : parsedDate.toISOString().slice(0, 10)
+    };
+  }).filter(Boolean);
+
+  if (!imported.length) throw new Error("No valid sales rows were found in the CSV.");
+  return imported;
+}
+
+function normalizeFuel(value) {
+  const normalized = value.trim().toLowerCase();
+  const known = FUEL_TYPES.find((type) => type.toLowerCase() === normalized);
+  return known || (value.trim() || "Unknown");
+}
+
+function normalizeTransmission(value) {
+  const normalized = value.trim().toLowerCase();
+  if (normalized === "auto" || normalized === "automatic") return "Automatic";
+  if (normalized === "manual" || normalized === "stick") return "Manual";
+  return value.trim() || "Unknown";
+}
+
+function initializeYearFilter() {
+  const years = [...new Set([
+    ...sales.map((car) => car.year),
+    ...inventory.map((car) => car.year)
+  ])].sort((a, b) => b - a);
+  $("#yearFilter").innerHTML = `<option value="">All years</option>` +
+    years.map((year) => `<option value="${year}">${year}</option>`).join("");
+}
+
+function setupNavigation() {
+  const links = $$(".nav-link");
+  const pageLabel = $("#currentPage");
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      links.forEach((item) => item.classList.remove("active"));
+      link.classList.add("active");
+      pageLabel.textContent = link.textContent.trim();
+      $("#sidebar").classList.remove("open");
+    });
+  });
+
+  const sections = $$(".page-section");
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const activeLink = $(`.nav-link[data-page="${visible.target.id}"]`);
+    if (!activeLink) return;
+    links.forEach((link) => link.classList.toggle("active", link === activeLink));
+    pageLabel.textContent = activeLink.textContent.trim();
+  }, { rootMargin: "-15% 0px -70% 0px", threshold: [0, .15, .4] });
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+function setupEvents() {
+  ["searchInput", "yearFilter", "fuelFilter", "transmissionFilter", "minPriceFilter", "maxPriceFilter"].forEach((id) => {
+    const element = document.getElementById(id);
+    element.addEventListener(id === "searchInput" ? "input" : "change", updateAll);
+    if (id.includes("Price")) element.addEventListener("input", updateAll);
+  });
+
+  $("#resetFilters").addEventListener("click", () => {
+    $("#searchInput").value = "";
+    $("#yearFilter").value = "";
+    $("#fuelFilter").value = "";
+    $("#transmissionFilter").value = "";
+    $("#minPriceFilter").value = "";
+    $("#maxPriceFilter").value = "";
+    updateAll();
+  });
+
+  $("#exportCsv").addEventListener("click", exportCsv);
+  $("#prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage -= 1;
+      updateSalesTable(getFilteredSales());
+    }
+  });
+  $("#nextPage").addEventListener("click", () => {
+    const pageCount = Math.ceil(getFilteredSales().length / PAGE_SIZE);
+    if (currentPage < pageCount) {
+      currentPage += 1;
+      updateSalesTable(getFilteredSales());
+    }
+  });
+
+  $$(".sort-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const clickedKey = button.dataset.sort;
+      if (sortKey === clickedKey) sortDirection = sortDirection === "asc" ? "desc" : "asc";
+      else {
+        sortKey = clickedKey;
+        sortDirection = clickedKey === "salesDate" ? "desc" : "asc";
+      }
+      updateSalesTable(getFilteredSales());
+    });
+  });
+
+  $("#csvUpload").addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      sales = parseCsv(text);
+      initializeYearFilter();
+      updateAll();
+      alert(`Imported ${number.format(sales.length)} sales records.`);
+    } catch (error) {
+      alert(`Could not import CSV: ${error.message}`);
+    } finally {
+      event.target.value = "";
+    }
+  });
+
+  $("#menuToggle").addEventListener("click", () => $("#sidebar").classList.toggle("open"));
+  document.addEventListener("click", (event) => {
+    if (window.innerWidth <= 680 &&
+        $("#sidebar").classList.contains("open") &&
+        !$("#sidebar").contains(event.target) &&
+        !$("#menuToggle").contains(event.target)) {
+      $("#sidebar").classList.remove("open");
+    }
+  });
+}
+
+function initialize() {
+  $("#todayLabel").textContent = new Date().toLocaleDateString("en-US", {
+    month: "short", day: "numeric", year: "numeric"
+  });
+  initializeYearFilter();
+  setupEvents();
+  setupNavigation();
+  updateAll();
+}
+
+initialize();
